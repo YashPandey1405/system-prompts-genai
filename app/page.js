@@ -1,102 +1,151 @@
-import Image from "next/image";
+"use client";
+import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import { Github, Linkedin, Twitter, Zap } from "lucide-react";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const router = useRouter();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const implementations = [
+    {
+      title: "Zero-shot Prompting",
+      desc: "Generate answers without prior examples.",
+      route: "/zero-shot",
+    },
+    {
+      title: "One-shot Prompting",
+      desc: "Provide a single example for guidance.",
+      route: "/one-shot",
+    },
+    {
+      title: "Chain of Thought",
+      desc: "Break down reasoning step by step.",
+      route: "/cot",
+    },
+    {
+      title: "Self Prompting",
+      desc: "Models generate their own improved prompts.",
+      route: "/self-prompt",
+    },
+    {
+      title: "Persona Prompting",
+      desc: "Answering as a custom persona (Yash).",
+      route: "/persona-yash",
+    },
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-950 flex flex-col items-center text-gray-100">
+      {/* Hero Section */}
+      <section className="w-full py-20 px-6 text-center relative overflow-hidden">
+        {/* Animated gradient blobs */}
+        <div className="absolute -top-20 -left-20 w-72 h-72 bg-purple-600/40 blur-3xl rounded-full animate-pulse" />
+        <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-blue-500/30 blur-3xl rounded-full animate-pulse" />
+
+        <motion.img
+          src="https://res.cloudinary.com/dah7l8utl/image/upload/v1750844086/TaskNexus_MERN-Project/oo5qxmxyw0c4aspjakzs.jpg"
+          alt="Project Banner"
+          className="w-40 h-40 rounded-full mx-auto shadow-xl mb-6 border-4 border-white/70"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8, type: "spring" }}
+        />
+
+        <motion.h1
+          className="text-5xl font-extrabold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent"
+          initial={{ y: 40, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          Hi, I'm Yash Pandey 👋
+        </motion.h1>
+
+        <motion.p
+          className="mt-6 text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
+        >
+          A passionate Web Developer and Data Scientist, exploring the power of
+          Generative AI and advanced backend systems. This mini-project
+          demonstrates my implementations with the OpenAI API.
+        </motion.p>
+      </section>
+
+      {/* Socials */}
+      <section className="py-12 px-6 w-full max-w-4xl text-center">
+        <h2 className="text-2xl font-semibold mb-6">🌐 Connect with Me</h2>
+        <div className="flex justify-center gap-8">
+          {[
+            {
+              icon: <Github className="w-6 h-6" />,
+              href: "https://github.com/YashPandey1405",
+            },
+            {
+              icon: <Linkedin className="w-6 h-6" />,
+              href: "https://linkedin.com/in/yashpandey29/",
+            },
+            {
+              icon: <Twitter className="w-6 h-6" />,
+              href: "https://x.com/pandeyyash041",
+            },
+          ].map((s, i) => (
+            <motion.a
+              key={i}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 rounded-full bg-white/10 hover:bg-white/20 transition flex items-center justify-center"
+              whileHover={{ scale: 1.2, rotate: 5 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {s.icon}
+            </motion.a>
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </section>
+
+      {/* Implementations */}
+      <section className="py-20 px-6 w-full border-t border-white/10 bg-white/5">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-12 flex items-center justify-center gap-2">
+            <Zap className="w-6 h-6 text-yellow-400" /> My OpenAI
+            Implementations
+          </h2>
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {implementations.map((impl, i) => (
+              <motion.button
+                key={impl.route}
+                onClick={() => router.push(impl.route)}
+                className="p-6 bg-white/10 backdrop-blur-md rounded-2xl shadow-lg hover:shadow-purple-500/30 transition relative group"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.15, duration: 0.6 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.05 }}
+              >
+                <h3 className="text-xl font-semibold mb-2">{impl.title}</h3>
+                <p className="text-sm text-gray-300">{impl.desc}</p>
+
+                {/* Hover Icon */}
+                <motion.div
+                  className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 text-purple-400"
+                  initial={{ scale: 0 }}
+                  whileHover={{ scale: 1.2, rotate: 15 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Zap className="w-5 h-5" />
+                </motion.div>
+              </motion.button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="w-full py-6 text-center bg-black/40 border-t border-white/10 text-sm text-gray-400">
+        © {new Date().getFullYear()} Yash Pandey. Built with ❤️ using Next.js +
+        Tailwind + Framer Motion.
       </footer>
     </div>
   );
